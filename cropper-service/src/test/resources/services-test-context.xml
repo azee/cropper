@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:hz="http://www.hazelcast.com/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/data/mongo
+            http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-2.0.xsd
+            http://www.hazelcast.com/schema/spring
+            http://www.hazelcast.com/schema/spring/hazelcast-spring-2.1.xsd">
+
+    <!-- Includes -->
+    <util:properties id="internal" location="classpath:internal.properties"/>
+    <util:properties id="domain" location="classpath:domain.properties"/>
+
+
+    <!-- Properties -->
+    <bean id="configurationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath*:internal.properties"/>
+    </bean>
+
+    <context:component-scan base-package="ru.greatbit.cropper"/>
+
+    <!-- Mongo -->
+    <mongo:repositories base-package="ru.greatbit.cropper.repositories" repository-impl-postfix="CustomImpl"/>
+
+    <bean name="fongo" class="com.github.fakemongo.Fongo">
+        <constructor-arg value="InMemoryMongo" />
+    </bean>
+
+    <bean id="mongo" factory-bean="fongo" factory-method="getMongo" />
+
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo" dbname="database" />
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongoDbFactory"/>
+    </bean>
+
+    <bean id="mongoOperations" class="org.springframework.data.mongodb.core.MongoTemplate" scope="prototype">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+</beans>

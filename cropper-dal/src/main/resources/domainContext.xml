@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/data/mongo
+            http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-2.0.xsd
+            http://www.springframework.org/schema/aop
+	        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+    <bean id="apiProps" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>file:///${project.parent.basedir}/template-rest/conf/tour-miner-local.properties</value>
+                <value>file:///etc/tour-miner/api/tour-miner.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
+
+    <util:properties id="domain" location="classpath:domain.properties"/>
+
+    <mongo:mongo id="mongo" replica-set="${mongo.replicaSet}" >
+        <mongo:options
+                connections-per-host="40"
+                threads-allowed-to-block-for-connection-multiplier="1000"
+                connect-timeout="15000"
+                auto-connect-retry="true"
+                socket-timeout="60000" />
+    </mongo:mongo>
+
+    <mongo:db-factory id="mongoDbFactory"
+                      dbname="${mongo.dbname}"
+                      username="${mongo.username}"
+                      password="${mongo.password}"
+                      mongo-ref="mongo" />
+
+    <bean id="mongoOperations" class="org.springframework.data.mongodb.core.MongoTemplate" scope="prototype">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate" scope="prototype">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+    </bean>
+
+    <mongo:repositories base-package="ru.greatbit.cropper.repositories" repository-impl-postfix="CustomImpl"/>
+
+    <aop:aspectj-autoproxy />
+
+</beans>

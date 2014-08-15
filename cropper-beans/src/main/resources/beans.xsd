@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:beans.cropper.greatbit.ru"
+           targetNamespace="urn:beans.cropper.greatbit.ru"
+           elementFormDefault="qualified"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           jaxb:version="2.1">
+
+    <xs:element name="video" type="Video"/>
+    <xs:complexType name="Video">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="url" type="xs:string"/>
+            <xs:element name="videoId" type="xs:string"/>
+            <xs:element name="source" type="Source"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="source" type="Source"/>
+    <xs:simpleType name="Source">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="youtube"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
