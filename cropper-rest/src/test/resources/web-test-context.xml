@@ -25,7 +25,12 @@
         <property name="locations" value="classpath*:internal.properties"/>
     </bean>
 
-    <context:component-scan base-package="ru.greatbit.cropper"/>
+    <bean class="ru.greatbit.cropper.plugins.PluginsPostProcessor"/>
+
+    <context:component-scan base-package="ru.greatbit.cropper">
+        <context:include-filter type="annotation"
+                                expression="ru.greatbit.cropper.plugin.CropperPluginMeta"/>
+    </context:component-scan>
 
     <!-- Mongo -->
     <mongo:repositories base-package="ru.greatbit.cropper.repositories" repository-impl-postfix="CustomImpl"/>

@@ -3,7 +3,7 @@ package ru.greatbit.cropper.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.greatbit.cropper.beans.Video;
-import ru.greatbit.cropper.service.services.VideoService;
+import ru.greatbit.cropper.services.VideoService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

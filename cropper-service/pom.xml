@@ -24,6 +24,16 @@
 
         <dependency>
             <groupId>ru.greatbit</groupId>
+            <artifactId>cropper-plugin-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.greatbit</groupId>
+            <artifactId>cropper-plugin-youtube</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.greatbit</groupId>
             <artifactId>java-utils</artifactId>
         </dependency>
 

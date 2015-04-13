@@ -286,10 +286,10 @@
                     <!-- Configure the webapp -->
                     <contextPath>/</contextPath>
                     <useTestClasspath>true</useTestClasspath>
-                    <webXml>${project.parent.basedir}/miner-rest/src/test/resources/WEB-INF/web.xml</webXml>
-                    <webApp>${project.parent.basedir}/miner-rest/src/test/resources/WEB-INF</webApp>
-                    <webAppSourceDirectory>${project.parent.basedir}/miner-rest/src/test/resources/WEB-INF</webAppSourceDirectory>
-                    <classesDirectory>${project.parent.basedir}/miner-rest/target/classes</classesDirectory>
+                    <webXml>${project.parent.basedir}/cropper-rest/src/test/resources/WEB-INF/web.xml</webXml>
+                    <webApp>${project.parent.basedir}/cropper-rest/src/test/resources/WEB-INF</webApp>
+                    <webAppSourceDirectory>${project.parent.basedir}/cropper-rest/src/test/resources/WEB-INF</webAppSourceDirectory>
+                    <classesDirectory>${project.parent.basedir}/cropper-rest/target/classes</classesDirectory>
                     <!-- configure the container                 -->
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

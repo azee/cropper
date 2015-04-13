@@ -1,4 +1,4 @@
-package ru.greatbit.cropper.service.services;
+package ru.greatbit.cropper.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
