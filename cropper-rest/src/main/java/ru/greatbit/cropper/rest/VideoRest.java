@@ -18,6 +18,8 @@ public class VideoRest {
     @Autowired
     VideoService videoService;
 
+
+
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
@@ -29,7 +31,17 @@ public class VideoRest {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/")
-    public Video saveVideo(Video video){
+    public Video saveVideoByUrl(Video video){
         return videoService.createVideo(video);
+    }
+
+    @POST
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("/{pluginId}")
+    public Video saveVideoByPlugin(
+            @PathParam("pluginId") String pluginId,
+            Video video){
+        return videoService.createVideo(pluginId, video);
     }
 }

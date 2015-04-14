@@ -11,17 +11,12 @@
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="url" type="xs:string"/>
-            <xs:element name="videoId" type="xs:string"/>
-            <xs:element name="source" type="Source"/>
+            <xs:element name="originUurl" type="xs:string"/>
+            <xs:element name="startTime" type="xs:long"/>
+            <xs:element name="stopTime" type="xs:long"/>
+            <xs:element name="plugin" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-
-    <xs:element name="source" type="Source"/>
-    <xs:simpleType name="Source">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="youtube"/>
-        </xs:restriction>
-    </xs:simpleType>
 
     <xs:element name="stringData" type="StringData"/>
     <xs:complexType name="StringData">
